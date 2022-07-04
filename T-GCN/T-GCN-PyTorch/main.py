@@ -52,7 +52,7 @@ def main_supervised(args):
     model = get_model(args, dm)
     task = get_task(args, model, dm)
     callbacks = get_callbacks(args)
-    trainer = pl.Trainer.from_argparse_args(args, callbacks=callbacks)
+    trainer = pl.Trainer.from_argparse_args(args,gpus=1, callbacks=callbacks)
     trainer.fit(task, dm)
     results = trainer.validate(datamodule=dm)
     return results
@@ -74,6 +74,8 @@ if __name__ == "__main__":
     print("生成成功")
     parser = argparse.ArgumentParser()
     parser = pl.Trainer.add_argparse_args(parser)
+    pl.Trainer.
+
 
     parser.add_argument(
         "--data", type=str, help="The name of the dataset", choices=("shenzhen", "losloop"), default="losloop"
