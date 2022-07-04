@@ -14,7 +14,10 @@ def load_adjacency_matrix(adj_path,dtype=np.float32):
     # adj_df = pd.read_csv(adj_path, header=None)
     # print(adj_df.shape)
     # adj = np.array(adj_df, dtype=dtype)
-    adj_df=get_adjacent_matrix(adj_path,170)
+    if "pems08_adj.csv" in adj_path:
+        adj_df=get_adjacent_matrix(adj_path,170)
+    if "pems04_adj.csv" in adj_path:
+        adj_df=get_adjacent_matrix(adj_path,307)
     adj = np.array(adj_df, dtype=dtype)
     return adj
 def get_adjacent_matrix(distance_file: str, num_nodes: int, id_file: str = None, graph_type="distance") -> np.array:
