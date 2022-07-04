@@ -79,6 +79,7 @@ class SupervisedForecastTask(pl.LightningModule):
         loss = self.loss(predictions, y)
         rmse = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions, y))
         mae = torchmetrics.functional.mean_absolute_error(predictions, y)
+        mape=torchmetrics.functional.mean_absolute_percentage_error(predictions, y)
         accuracy = utils.metrics.accuracy(predictions, y)
         r2 = utils.metrics.r2(predictions, y)
         explained_variance = utils.metrics.explained_variance(predictions, y)
@@ -86,9 +87,11 @@ class SupervisedForecastTask(pl.LightningModule):
             "val_loss": loss,
             "RMSE": rmse,
             "MAE": mae,
+            "MAPE":mape,
             "accuracy": accuracy,
             "R2": r2,
             "ExplainedVar": explained_variance,
+
         }
         self.log_dict(metrics)
         return predictions.reshape(batch[1].size()), y.reshape(batch[1].size())

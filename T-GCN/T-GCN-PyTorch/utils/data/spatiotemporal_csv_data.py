@@ -32,7 +32,7 @@ class SpatioTemporalCSVDataModule(pl.LightningDataModule):
     @staticmethod
     def add_data_specific_arguments(parent_parser):
         parser = argparse.ArgumentParser(parents=[parent_parser], add_help=False)
-        parser.add_argument("--batch_size", type=int, default=32)
+        parser.add_argument("--batch_size", type=int, default=64)
         parser.add_argument("--seq_len", type=int, default=12)
         parser.add_argument("--pre_len", type=int, default=3)
         parser.add_argument("--split_ratio", type=float, default=0.8)
