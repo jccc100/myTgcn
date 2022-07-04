@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
 
     parser.add_argument(
-        "--data", type=str, help="The name of the dataset", choices=("shenzhen", "losloop"), default="shenzhen"
+        "--data", type=str, help="The name of the dataset", choices=("shenzhen", "losloop"), default="losloop"
     )
     parser.add_argument(
         "--model_name",
