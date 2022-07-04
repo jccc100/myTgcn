@@ -74,7 +74,7 @@ if __name__ == "__main__":
     print("生成成功")
     parser = argparse.ArgumentParser()
     parser = pl.Trainer.add_argparse_args(parser)
-    pl.Trainer.
+
 
 
     parser.add_argument(
