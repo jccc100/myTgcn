@@ -52,7 +52,7 @@ def main_supervised(args):
     model = get_model(args, dm)
     task = get_task(args, model, dm)
     callbacks = get_callbacks(args)
-    trainer = pl.Trainer.from_argparse_args(args,gpus=1,max_epochs=1000, callbacks=callbacks)
+    trainer = pl.Trainer.from_argparse_args(args,gpus=1,max_epochs=700, callbacks=callbacks)
     trainer.fit(task, dm)
     results = trainer.validate(datamodule=dm)
     return results
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     data2 = np.load("./data/pems08.npz")['data'][:, :, 0]
     np.savetxt("./data/pems08.csv", data2, delimiter=",")
     print("生成成功")
-    print("epoch:1000")
+    print("epoch:700")
     parser = argparse.ArgumentParser()
     parser = pl.Trainer.add_argparse_args(parser)
 
