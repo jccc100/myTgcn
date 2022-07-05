@@ -72,6 +72,7 @@ if __name__ == "__main__":
     data2 = np.load("./data/pems08.npz")['data'][:, :, 0]
     np.savetxt("./data/pems08.csv", data2, delimiter=",")
     print("生成成功")
+    print("epoch:1000")
     parser = argparse.ArgumentParser()
     parser = pl.Trainer.add_argparse_args(parser)
 
