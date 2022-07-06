@@ -78,8 +78,8 @@ class SupervisedForecastTask(pl.LightningModule):
         predictions = predictions * self.feat_max_val
         predictions2=predictions
         y2=y
-        np.save("prediction.npz",predictions2.cpu,allow_pickle=True)
-        np.save("true.npz",y2.cpu(),allow_pickle=True)
+        np.savez("prediction.npz",predictions2.cpu,allow_pickle=True)
+        np.savez("true.npz",y2.cpu(),allow_pickle=True)
         predictions_shape=predictions.shape
         y = y * self.feat_max_val
         y_shape=y.shape
