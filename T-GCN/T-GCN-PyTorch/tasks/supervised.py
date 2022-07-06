@@ -6,6 +6,7 @@ import pytorch_lightning as pl
 import torchmetrics
 import utils.metrics
 import utils.losses
+import numpy as np
 
 
 class SupervisedForecastTask(pl.LightningModule):
@@ -75,6 +76,10 @@ class SupervisedForecastTask(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
         predictions, y = self.shared_step(batch, batch_idx)
         predictions = predictions * self.feat_max_val
+        predictions2=predictions
+        y2=y
+        np.save("prediction.npy",predictions2)
+        np.save("true.npy",y2)
         predictions_shape=predictions.shape
         y = y * self.feat_max_val
         y_shape=y.shape
