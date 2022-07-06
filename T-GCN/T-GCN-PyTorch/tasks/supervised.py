@@ -83,10 +83,72 @@ class SupervisedForecastTask(pl.LightningModule):
         predictions_shape=predictions.shape
         y = y * self.feat_max_val
         y_shape=y.shape
+
+        predictions1 = predictions[0:3374, :]
+        y1 = y[0:3374, :]
+        predictions2 = predictions[3374:6749, :]
+        y2 = y[3374:6749, :]
+        predictions3 = predictions[6749:10124, :]
+        y3= y[6749:10124, :]
+        predictions4 = predictions[10124:13499, :]
+        y4= y[10124:13499, :]
+        predictions5 = predictions[13499:16874, :]
+        y5 = y[13499:16874, :]
+        predictions6 = predictions[16874:20249, :]
+        y6 = y[16874:20249, :]
+        predictions7 = predictions[20249:23624, :]
+        y7= y[20249:23624, :]
+        predictions8 = predictions[23624:26999, :]
+        y8 = y[23624:26999, :]
+        predictions9 = predictions[26999:30374, :]
+        y9 = y[26999:30374, :]
+        predictions10 = predictions[30374:33749, :]
+        y10 = y[30374:33749, :]
+
+        predictions11 = predictions[33794:37124, :]
+        y11 = y[33794:37124, :]
+
         predictions12=predictions[37124:40499,:]
         y12=y[37124:40499,:]
+        mae1 = torchmetrics.functional.mean_absolute_error(predictions1, y1)
+        rmse1 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions1, y1))
+
+        mae2 = torchmetrics.functional.mean_absolute_error(predictions2, y2)
+        rmse2 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions2, y2))
+
+        mae3 = torchmetrics.functional.mean_absolute_error(predictions3, y3)
+        rmse3 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions3, y3))
+
+        mae4= torchmetrics.functional.mean_absolute_error(predictions4, y4)
+        rmse4 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions4, y4))
+
+        mae5 = torchmetrics.functional.mean_absolute_error(predictions5, y5)
+        rmse5 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions5, y5))
+
+        mae6 = torchmetrics.functional.mean_absolute_error(predictions6, y6)
+        rmse6 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions6, y6))
+
+        mae7 = torchmetrics.functional.mean_absolute_error(predictions7, y7)
+        rmse7 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions7, y7))
+
+        mae8 = torchmetrics.functional.mean_absolute_error(predictions8, y8)
+        rmse8 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions8, y8))
+
+        mae9 = torchmetrics.functional.mean_absolute_error(predictions9, y9)
+        rmse9 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions9, y9))
+
+        mae10 = torchmetrics.functional.mean_absolute_error(predictions10, y10)
+        rmse10 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions10, y10))
+
+        mae11 = torchmetrics.functional.mean_absolute_error(predictions11, y11)
+        rmse11 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions11, y11))
+
         mae12 = torchmetrics.functional.mean_absolute_error(predictions12, y12)
         rmse12 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions12, y12))
+
+        average_mae=mae1+mae2+mae3+mae4+mae5+mae6+mae7+mae8+mae9+mae10+mae11+mae12
+        average_rmse=rmse1+rmse2+rmse3+rmse4+rmse5+rmse6+rmse7+rmse8+rmse9+rmse10+rmse11+rmse12
+
         loss = self.loss(predictions, y)
         rmse = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions, y))
         mae = torchmetrics.functional.mean_absolute_error(predictions, y)
@@ -99,8 +161,45 @@ class SupervisedForecastTask(pl.LightningModule):
             "predictions shape2": predictions_shape[1],
             "y shape1": y_shape[0],
             "y shape2": y_shape[1],
-            "mae12":mae12,
-            "rmse12":rmse12,
+            "mae1":mae1,
+            "rmse1":rmse1,
+
+            "mae2": mae2,
+            "rmse2": rmse2,
+
+            "mae3": mae3,
+            "rmse3": rmse3,
+
+            "mae4": mae4,
+            "rmse4": rmse4,
+
+            "mae5": mae5,
+            "rmse5": rmse5,
+
+            "mae6": mae6,
+            "rmse6": rmse6,
+
+            "mae7": mae7,
+            "rmse7": rmse7,
+
+            "mae8": mae8,
+            "rmse8": rmse8,
+
+            "mae9": mae9,
+            "rmse9": rmse9,
+
+            "mae10": mae10,
+            "rmse10": rmse10,
+
+            "mae11": mae11,
+            "rmse11": rmse11,
+
+            "mae12": mae12,
+            "rmse12": rmse12,
+
+            "average_mae":average_mae,
+            "average_rmse":average_rmse,
+
             "RMSE": rmse,
             "MAE": mae,
             "MAPE":mape,
