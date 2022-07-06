@@ -76,10 +76,12 @@ class SupervisedForecastTask(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
         predictions, y = self.shared_step(batch, batch_idx)
         predictions = predictions * self.feat_max_val
-        predictions2=predictions
-        y2=y
-        np.savez("prediction.npz",predictions2.cpu,allow_pickle=True)
-        np.savez("true.npz",y2.cpu(),allow_pickle=True)
+        predictions12=predictions[37124:40499,:]
+        y12=y[37124:40499,:]
+        # np.savez("prediction.npz",predictions2.cpu(),allow_pickle=True)
+        # np.savez("true.npz",y2.cpu(),allow_pickle=True)
+        mae12=torchmetrics.functional.mean_absolute_error(predictions12, y12)
+        rmse12 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions12, y12))
         predictions_shape=predictions.shape
         y = y * self.feat_max_val
         y_shape=y.shape
@@ -95,6 +97,8 @@ class SupervisedForecastTask(pl.LightningModule):
             "predictions shape2": predictions_shape[1],
             "y shape1": y_shape[0],
             "y shape2": y_shape[1],
+            "mae12":mae12,
+            "rmse12":rmse12,
             "RMSE": rmse,
             "MAE": mae,
             "MAPE":mape,
