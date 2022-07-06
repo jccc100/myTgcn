@@ -75,7 +75,9 @@ class SupervisedForecastTask(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
         predictions, y = self.shared_step(batch, batch_idx)
         predictions = predictions * self.feat_max_val
+        predictions_shape=predictions.shape
         y = y * self.feat_max_val
+        y_shape=y.shape
         loss = self.loss(predictions, y)
         rmse = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions, y))
         mae = torchmetrics.functional.mean_absolute_error(predictions, y)
@@ -84,7 +86,8 @@ class SupervisedForecastTask(pl.LightningModule):
         r2 = utils.metrics.r2(predictions, y)
         explained_variance = utils.metrics.explained_variance(predictions, y)
         metrics = {
-            "val_loss": loss,
+            "predictions shape": predictions_shape,
+            "y shape": y_shape,
             "RMSE": rmse,
             "MAE": mae,
             "MAPE":mape,
