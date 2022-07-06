@@ -86,11 +86,10 @@ class SupervisedForecastTask(pl.LightningModule):
         r2 = utils.metrics.r2(predictions, y)
         explained_variance = utils.metrics.explained_variance(predictions, y)
         metrics = {
-            "predictions shape1": predictions_shape[1],
-            "predictions shape2": predictions_shape[2],
-
-
-            # "y shape": y_shape,
+            "predictions shape1": predictions_shape[0],
+            "predictions shape2": predictions_shape[1],
+            "y shape1": y_shape[0],
+            "y shape2": y_shape[1],
             "RMSE": rmse,
             "MAE": mae,
             "MAPE":mape,
