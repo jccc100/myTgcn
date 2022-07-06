@@ -146,8 +146,8 @@ class SupervisedForecastTask(pl.LightningModule):
         mae12 = torchmetrics.functional.mean_absolute_error(predictions12, y12)
         rmse12 = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions12, y12))
 
-        average_mae=mae1+mae2+mae3+mae4+mae5+mae6+mae7+mae8+mae9+mae10+mae11+mae12
-        average_rmse=rmse1+rmse2+rmse3+rmse4+rmse5+rmse6+rmse7+rmse8+rmse9+rmse10+rmse11+rmse12
+        average_mae=(mae1+mae2+mae3+mae4+mae5+mae6+mae7+mae8+mae9+mae10+mae11+mae12)/12
+        average_rmse=(rmse1+rmse2+rmse3+rmse4+rmse5+rmse6+rmse7+rmse8+rmse9+rmse10+rmse11+rmse12)/12
 
         loss = self.loss(predictions, y)
         rmse = torch.sqrt(torchmetrics.functional.mean_squared_error(predictions, y))
